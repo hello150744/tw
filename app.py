@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet.protocol import Protocol
 from twisted.internet.endpoints import TCP4ClientEndpoint, connectProtocol
+from twisted.protocols.ftp import FTPClient
 host='59.66.193.197'
 port=8080
 
@@ -18,6 +19,6 @@ def gotProtocol(p):
     reactor.callLater(2, p.transport.loseConnection)
 
 point = TCP4ClientEndpoint(reactor, host, port)
-d = connectProtocol(point, Greeter())
-d.addCallback(gotProtocol)
+d = connectProtocol(point, FTPClient())
+#d.addCallback(gotProtocol)
 reactor.run()
