@@ -18,7 +18,7 @@ def main():
     """This runs the protocol on port 8000"""
     factory = protocol.ServerFactory()
     factory.protocol = Echo
-    reactor.listenTCP(local_port,factory,interface=local_hostname)
+    reactor.listenTCP(8080,factory,interface=local_hostname)
     reactor.run()
 
 # this only runs if the module was *not* imported
