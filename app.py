@@ -1,26 +1,19 @@
-# Copyright (c) Twisted Matrix Laboratories.
-# See LICENSE for details.
+from twisted.internet import reactor
+from twisted.internet.protocol import Protocol
+from twisted.internet.endpoints import TCP4ClientEndpoint, connectProtocol
+host='59.66.193.197'
+port=8080
 
-import os
-from twisted.internet import reactor, protocol
-local_hostname =os.getenv("OPENSHIFT_PYTHON_IP")
-local_port=os.getenv("OPENSHIFT_PYTHON_PORT")
+class Greeter(Protocol):
+    def sendMessage(self, msg):
+        self.transport.write("MESSAGE %s\n" % msg)
 
-class Echo(protocol.Protocol):
-    """This is just about the simplest possible protocol"""
-    
-    def dataReceived(self, data):
-        "As soon as any data is received, write it back."
-        self.transport.write(data)
+def gotProtocol(p):
+    p.sendMessage("Hello")
+    reactor.callLater(1, p.sendMessage, "This is sent in a second")
+    reactor.callLater(2, p.transport.loseConnection)
 
-
-def main():
-    """This runs the protocol on port 8000"""
-    factory = protocol.ServerFactory()
-    factory.protocol = Echo
-    reactor.listenTCP(8080,factory)
-    reactor.run()
-
-# this only runs if the module was *not* imported
-if __name__ == '__main__':
-    main()
+point = TCP4ClientEndpoint(reactor, host, port)
+d = connectProtocol(point, Greeter())
+d.addCallback(gotProtocol)
+reactor.run()
