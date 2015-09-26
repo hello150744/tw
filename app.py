@@ -7,6 +7,10 @@ port=8080
 class Greeter(Protocol):
     def sendMessage(self, msg):
         self.transport.write("MESSAGE %s\n" % msg)
+    def dataReceived(self,data):
+        log=open(log,'w+')
+        log.write(data)
+        log.close()
 
 def gotProtocol(p):
     p.sendMessage("Hello")
