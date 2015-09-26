@@ -1,8 +1,9 @@
 # Copyright (c) Twisted Matrix Laboratories.
 # See LICENSE for details.
 
-
+import os
 from twisted.internet import reactor, protocol
+local_hostname =os.getenv("OPENSHIFT_INTERNAL_IP")
 
 
 class Echo(protocol.Protocol):
@@ -17,7 +18,7 @@ def main():
     """This runs the protocol on port 8000"""
     factory = protocol.ServerFactory()
     factory.protocol = Echo
-    reactor.listenTCP(80,factory)
+    reactor.listenTCP(15000,factory,interface=local_hostname)
     reactor.run()
 
 # this only runs if the module was *not* imported
