@@ -52,13 +52,14 @@ def scanhost():
         try:
             with gevent.Timeout(2, False) as timeout:
                 website = urllib2.urlopen(host)
+                #read html code
+                html = website.read()
+                #use re.findall to get all the links
+                links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me)).*?)"', html,re.I)
         except TypeError,e:
             print 'urlopen:'+host+str(e)
 
-        #read html code
-        html = website.read()
-        #use re.findall to get all the links
-        links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me)).*?)"', html,re.I)
+
 
         for link in links:
             if link[0] not in hostset1:
