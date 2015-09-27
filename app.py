@@ -56,10 +56,6 @@ def scanhost():
                 html = website.read()
                 #use re.findall to get all the links
                 links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me)).*?)"', html,re.I)
-        except TypeError,e:
-            print 'urlopen:'+host+str(e)
-
-
 
             for link in links:
                 if link[0] not in hostset1:
