@@ -50,7 +50,7 @@ def scanhost():
         #connect to a URL
         print host
         try:
-            with gevent.Timeout(2, False) as timeout:
+            with gevent.Timeout(3, False) as timeout:
                 website = urllib2.urlopen(host)
                 #read html code
                 html = website.read()
@@ -61,18 +61,21 @@ def scanhost():
 
 
 
-        for link in links:
-            if link[0] not in hostset1:
-                hostpool.put(link[0])
-                hostset1.add(link[0])
+            for link in links:
+                if link[0] not in hostset1:
+                    hostpool.put(link[0])
+                    hostset1.add(link[0])
 
-            if link[2] not in hostset:
-                try: 
-                    ip = socket.gethostbyname(link[2]) 
-                except Exception,e:
-                    print 'gethost:'+link[2]+str(e)
-                hosts.put(ip)
-                hostset.add(link[2])
+                if link[2] not in hostset:
+                    try: 
+                        ip = socket.gethostbyname(link[2]) 
+                    except Exception,e:
+                        print 'gethost:'+link[2]+str(e)
+                    hosts.put(ip)
+                    hostset.add(link[2])
+        except TypeError,e:
+            print 'urlopen:'+host+str(e)
+
 pF = open(passwdFile, 'r')
 dic={}
 for line in pF.readlines():
