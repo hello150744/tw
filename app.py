@@ -69,8 +69,9 @@ def scanhost():
                             print 'gethost:'+link[2]+str(e)
                         hosts.put(ip)
                         hostset.add(link[2])
-        except TypeError,e:
+        except Exception,e:
             print 'urlopen:'+host+str(e)
+
 
 pF = open(passwdFile, 'r')
 dic={}
