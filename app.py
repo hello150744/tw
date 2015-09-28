@@ -55,7 +55,7 @@ def scanhost():
                 #read html code
                 html = website.read()
                 #use re.findall to get all the links
-                links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me)).*?)"', html,re.I)
+                links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me|\.edu|\.uk|\.jp|\.info|\.nl|\.tw|\.cf|\.ga|\.ly|\.hk|\.us|\.xyz|\.aisa|\.top|\.gq|\.ml)).*?)"', html,re.I)
 
                 for link in links:
                     if link[0] not in hostset1:
