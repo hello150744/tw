@@ -50,7 +50,7 @@ def scanhost():
         #connect to a URL
         print host
         try:
-            with gevent.Timeout(3, False) as timeout:
+            with gevent.Timeout(10, False) as timeout:
                 website = urllib2.urlopen(host)
                 #read html code
                 html = website.read()
