@@ -62,11 +62,12 @@ def scanhost():
                     if link[2] not in hostset:
                         try: 
                             ip = socket.gethostbyname(link[2]) 
+                            hosts.put(ip)
+                            hostset.add(link[2])
+                            hostpool.put(link[2])
                         except Exception,e:
                             print 'gethost:'+link[2]+str(e)
-                        hosts.put(ip)
-                        hostset.add(link[2])
-                        hostpool.put(link[2])
+
         except Exception,e:
             #print 'urlopen:'+host+str(e)
             pass
