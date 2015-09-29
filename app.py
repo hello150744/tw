@@ -46,8 +46,6 @@ def bruteLogin(dic):
         
 def scanhost():
     while True:
-        if not hosts.empty() :
-            gevent.sleep(0)
         if hostpool.empty():
             print 'no host'
         host=hostpool.get()
