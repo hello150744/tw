@@ -49,7 +49,7 @@ def scanhost():
             print 'no host'
         host=hostpool.get()
         #connect to a URL
-        #print host
+        print host
         try:
             with gevent.Timeout(20, False) as timeout:
                 website = urllib2.urlopen(host)
