@@ -56,17 +56,17 @@ def scanhost():
                 #read html code
                 html = website.read()
                 #use re.findall to get all the links
-                links = re.findall('"((http|ftp)?://(.*?\.(net|com|cn|org|cc|tv|tk|me|edu|uk|info|nl|cf|ga|ly|hk|us|xyz|aisa|top|gq|ml|jp))[/\' \"].*?)"', html,re.I)
+                links = re.findall('"(((http|ftp)?://([^\'\"=:;,?<>]*?\.(net|com|cn|org|cc|tv|tk|me|edu|uk|info|nl|cf|ga|ly|hk|us|xyz|aisa|top|gq|ml|jp)))[/\' \"].*?)"', html,re.I)
 
                 for link in links:
-                    if link[2] not in hostset:
+                    if link[3] not in hostset:
                         try: 
-                            ip = socket.gethostbyname(link[2]) 
+                            ip = socket.gethostbyname(link[3]) 
                             hosts.put(ip)
-                            hostset.add(link[2])
-                            hostpool.put(link[0])
+                            hostset.add(link[3])
+                            hostpool.put(link[1])
                         except Exception,e:
-                            print 'gethost:'+link[2]+str(e)
+                            print 'gethost:'+link[3]+str(e)
 
         except Exception,e:
             print 'urlopen:'+host+str(e)
