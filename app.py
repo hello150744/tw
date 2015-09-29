@@ -13,10 +13,12 @@ passwdFile = 'userpass.txt'
 hosts = queue.Queue()
 hostpool=queue.Queue()
 hostset=set()
-hostpool.put("http://web.de/")
-hostset.add("http://web.de/")
-hostpool.put("http://www.hao123.com/")
-hostset.add("http://www.hao123.com/")
+hostpool.put("http://web.de")
+hostset.add("http://web.de")
+hostpool.put("http://www.hao123.com")
+hostset.add("http://www.hao123.com")
+
+hostset.add("http://www.w3.org")
 def bruteLogin(dic):
     while True:
         if hosts.empty():
