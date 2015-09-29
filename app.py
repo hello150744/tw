@@ -15,10 +15,12 @@ hostpool=queue.Queue()
 hostset=set()
 hostpool.put("http://www.qkankan.com/")
 hostset.add("http://www.qkankan.com/")
+hostpool.put("http://www.hao123.com/")
+hostset.add("http://www.hao123.com/")
 def bruteLogin(dic):
     while True:
         if hosts.empty():
-            print 'hosts empty'
+            #print 'hosts empty'
             gevent.sleep(0)
             continue
         hostname=hosts.get()
@@ -54,7 +56,7 @@ def scanhost():
                 #read html code
                 html = website.read()
                 #use re.findall to get all the links
-                links = re.findall('"((http|ftp)?://(.*?\.(net|com|cn|org|cc|tv|tk|me|edu|uk|info|nl|cf|ga|ly|hk|us|xyz|aisa|top|gq|ml|jp)[/\' \"]).*?)"', html,re.I)
+                links = re.findall('"((http|ftp)?://(.*?\.(net|com|cn|org|cc|tv|tk|me|edu|uk|info|nl|cf|ga|ly|hk|us|xyz|aisa|top|gq|ml|jp))[/\' \"].*?)"', html,re.I)
 
                 for link in links:
                     if link[2] not in hostset:
