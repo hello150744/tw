@@ -82,6 +82,11 @@ for line in pF.readlines():
     userName=line.split(':')[0]
     passWord=line.split(':')[1].strip('\r').strip('\n')
     dic[userName]=passWord
-bure=gevent.spawn(bruteLogin,dic)
+bure1=gevent.spawn(bruteLogin,dic)
+bure2=gevent.spawn(bruteLogin,dic)
+bure3=gevent.spawn(bruteLogin,dic)
+bure4=gevent.spawn(bruteLogin,dic)
+bure5=gevent.spawn(bruteLogin,dic)
+bure6=gevent.spawn(bruteLogin,dic)
 scan=gevent.spawn(scanhost)
-gevent.joinall((scan,bure))
+gevent.joinall((scan,bure1,bure2,bure3,bure4,bure5,bure6))
