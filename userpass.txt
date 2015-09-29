@@ -3,4 +3,11 @@ admin:12345
 root:secret
 guest:guest
 root:toor
+root:root
+root:admin
+admin:root
+root:1234
+root:12345
+root:123456
+admin:123456
 anonymous:me@your.com
