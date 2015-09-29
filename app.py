@@ -56,7 +56,7 @@ def scanhost():
                 #use re.findall to get all the links
                 links = re.findall('"((http|ftp)?://(.*?(\.net|\.com|\.cn|\.org|\.cc|\.tv|\.tk|\.me|\.edu|\.uk|\.jp|\.info|\.nl|\.tw|\.cf|\.ga|\.ly|\.hk|\.us|\.xyz|\.aisa|\.top|\.gq|\.ml)).*?)"', html,re.I)
 
-
+                for link in links:
                     if link[2] not in hostset:
                         try: 
                             ip = socket.gethostbyname(link[2]) 
