@@ -15,6 +15,8 @@ hostpool=queue.Queue()
 hostset=set()
 hostpool.put("http://www.qkankan.com/")
 hostset.add("http://www.qkankan.com/")
+hostpool.put("http://www.aol.com/")
+hostset.add("http://www.aol.com/")
 def bruteLogin(dic):
     while True:
         if hosts.empty():
